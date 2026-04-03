@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوق العقارات والسيارات - بيع وشراء</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        nav {
+            background: #333;
+            padding: 1rem 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav li {
+            margin: 0 1rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #007bff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        .hero {
+            background: linear-gradient(rgba(0,123,255,0.8), rgba(0,86,179,0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23e3f2fd" width="1200" height="600"/><circle fill="%23007bff" opacity="0.3" cx="200" cy="150" r="80"/><circle fill="%23ffc107" opacity="0.4" cx="1000" cy="400" r="100"/><rect fill="%23fff" opacity="0.6" x="800" y="200" width="200" height="150" rx="10"/></svg>');
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        .section {
+            background: white;
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #007bff;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .listing-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: #fafafa;
+        }
+        .listing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .listing-image {
+            height: 200px;
+            background: linear-gradient(45deg, #007bff, #28a745);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .listing-info {
+            padding: 1rem;
+        }
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .tab {
+            padding: 0.75rem 1.5rem;
+            margin: 0 0.5rem;
+            background: #e9ecef;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            background: #007bff;
+            color: white;
+        }
+        .hidden {
+            display: none;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .listings {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏠🚗 سوق العقارات والسيارات</h1>
+        <p>أفضل الأسعار - أسرع البيع - أمان مضمون</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#real-estate">عقارات</a></li>
+            <li><a href="#cars">سيارات</a></li>
+            <li><a href="#add-listing">إضافة إعلان</a></li>
+            <li><a href="#contact">تواصل معنا</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section class="hero" id="home">
+            <h2>مرحباً بك في أكبر سوق للعقارات والسيارات</h2>
+            <p>بيع أو اشترِ عقارك أو سيارتك بأفضل الأسعار في السوق</p>
+            <button onclick="scrollToSection('add-listing')">أضف إعلانك الآن</button>
+        </section>
+
+        <div class="category-tabs">
+            <button class="tab active" onclick="showCategory('all')">الكل</button>
+            <button class="tab" onclick="showCategory('real-estate')">عقارات</button>
+            <button class="tab" onclick="showCategory('cars')">سيارات</button>
+        </div>
+
+        <section class="section" id="real-estate">
+            <h2>🏠 العقارات المتاحة</h2>
+            <div class="listings">
+                <div class="listing-card" data-category="real-estate">
+                    <div class="listing-image">فيلا 4 غرف - 500م</div>
+                    <div class="listing-info">
+                        <div class="price">2,500,000 ريال</div>
+                        <p>فيلا فاخرة في حي راقي، 4 غرف نوم، مسبح خاص</p>
+                        <button>اتصل بالبائع</button>
+                    </div>
+                </div>
+                <div class="listing-card" data-category="real-estate">
+                    <div class="listing-image">شقة 3 غرف - 150م</div>
+                    <div class="listing-info">
+                        <div class="price">850,000 ريال</div>
+                        <p>شقة جديدة مكتملة تشطيب، إطلالة رائعة</p>
+                        <button>اتصل بالبائع</button>
+                    </div>
+                </div>
+                <div class="listing-card" data-category="real-estate">
+                    <div class="listing-image">أرض 1000م</div>
+                    <div class="listing-info">
+                        <div class="price">1,200,000 ريال</div>
+                        <p>قطعة أرض في موقع استراتيجي، مثالية للبناء</p>
+                        <button>اتصل بالبائع</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="cars">
+            <h2>🚗 السيارات المتاحة</h2>
+            <div class="listings">
+                <div class="listing-card" data-category="cars">
+                    <div class="listing-image">مرسيدس C200 2022</div>
+                    <div class="listing-info">
+                        <div class="price">220,000 ريال</div>
+                        <p>موديل 2022، كيلومترات قليلة، حالة ممتازة</p>
+                        <button>اتصل بالبائع</button>
+                    </div>
+                </div>
+                <div class="listing-card" data-category="cars">
+                    <div class="listing-image">تويوتا كامري 2021</div>
+                    <div class="listing-info">
+                        <div class="price">95,000 ريال</div>
+                        <p>كامري LE، ضمان مصنع، صيانة دورية</p>
+                        <button>اتصل بالبائع</button>
+                    </div>
+                </div>
+                <div class="listing-card" data-category="cars">
+                    <div class="listing-image">بي إم دبليو X3 2020</div>
+                    <div class="listing-info">
+                        <div class="price">180,000 ريال</div>
+                        <p>دفع رباعي، موديل 2020، ملحقات كاملة</p>
+                        <button>اتصل بالبائع</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="add-listing">
+            <h2>📤 أضف إعلانك الجديد</h2>
+            <form id="listingForm">
+                <div class="form-group">
+                    <label>نوع الإعلان:</label>
+                    <select id="category" required>
+                        <option value="">اختر النوع</option>
+                        <option value="real-estate">عقار</option>
+                        <option value="cars">سيارة</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>العنوان:</label>
+                    <input type="text" id="title" placeholder="مثال: فيلا 4 غرف في الرياض" required>
+                </div>
+                <div class="form-group">
+                    <label>السعر (ريال):</label>
+                    <input type="number" id="price" placeholder="2500000" required>
+                </div>
+                <div class="form-group">
+                    <label>الوصف:</label>
+                    <textarea id="description" rows="4" placeholder="وصف مفصل للعقار أو السيارة..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>رقم الهاتف:</label>
+                    <input type="tel" id="phone" placeholder="05xxxxxxxx" required>
+                </div>
+                <button type="submit">نشر الإعلان</button>
+            </form>
+        </section>
+    </div>
+
+    <footer id="contact">
+        <p>&copy; 2024 سوق العقارات والسيارات. جميع الحقوق محفوظة.</p>
+        <p>للتواصل: info@souq.com | 966-500-1234567</p>
+    </footer>
+
+    <script>
+        // تبديل الفئات
+        function showCategory(category) {
+            const tabs = document.querySelectorAll('.tab');
+            const cards = document.querySelectorAll('.listing-card');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // التمرير للأقسام
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // معالجة نموذج الإعلان
+        document.getElementById('listingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const title = document.getElementById('title').value;
+            const price = document.getElementById('price').value;
+            
+            alert(`تم نشر إعلانك بنجاح!\nالعنوان: ${title}\nالسعر: ${price} ريال`);
+            this.reset();
+        });
+
+        // تنشيط الروابط في الشريط التنقلي
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // تأثيرات تفاعلية للبطاقات
+        document.querySelectorAll('.listing-card button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('سيتم التواصل معك قريباً لعرض التفاصيل!');
+            });
+        });
+    </script>
+</body>
+</html>
